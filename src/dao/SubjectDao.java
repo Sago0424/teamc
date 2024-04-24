@@ -120,7 +120,7 @@ public class SubjectDao extends Dao {
             statement = connection.prepareStatement("INSERT INTO SUBJECT (CD, NAME, SCHOOL_CD) VALUES (?, ?, ?)");
             statement.setString(1, subject.getCd());
             statement.setString(2, subject.getName());
-            statement.setString(3, subject.getSchool_Cd());
+            statement.setString(3, subject.getSchool().getCd());
 
             int rowsAffected = statement.executeUpdate();
             success = (rowsAffected > 0);

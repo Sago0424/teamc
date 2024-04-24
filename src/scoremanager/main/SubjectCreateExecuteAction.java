@@ -19,7 +19,7 @@ public class SubjectCreateExecuteAction extends Action {
         // フォームから送信されたデータを取得
         String cd = request.getParameter("cd");
         String name = request.getParameter("name");
-        String school_cd = request.getParameter("school_cd");
+
 
         // セッションからログインユーザー（教員）を取得
         HttpSession session = request.getSession();
@@ -35,8 +35,8 @@ public class SubjectCreateExecuteAction extends Action {
         Subject subject = new Subject();
         subject.setCd(cd);
         subject.setName(name);
-        subject.setSchool_Cd(school_cd);
         subject.setSchool(teacher.getSchool());
+
 
 
         // SubjectDaoを使用して新しい科目をデータベースに登録

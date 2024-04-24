@@ -7,15 +7,7 @@ public class Subject implements Serializable {
 	private String name;
 	private School school;
 	private String id;
-	private String school_cd;
 
-	public String getSchool_Cd(){
-		return school_cd;
-	}
-
-	public void setSchool_Cd(String school_cd){
-		this.school_cd = school_cd;
-	}
 
 
 

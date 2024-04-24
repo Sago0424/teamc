@@ -6,19 +6,7 @@
     <c:param name="scripts"></c:param>
     <c:param name="content">
         <style>
-            form {
-                background-color: white;
-                padding: 20px;
-                border-radius: 5px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                max-width: 500px;
-                margin: auto;
-            }
 
-            p {
-                font-size: 16px;
-                line-height: 1.6;
-                color: #555;
             }
 
             input[type="text"] {
@@ -47,16 +35,16 @@
                 color: #666;
             }
 
-            .nav-item {
-                color: #5577ff;
-                text-decoration: none;
-            }
+
+
         </style>
         <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">科目情報変更</h2>
         <form action="SubjectUpdateExecute.action" method="post">
             <p>
-                <label class="form-label">科目コード</label>
-                <input type="text" name="cd" value="${subject.getCd()}" readonly />
+                <label class="form-label">科目コード<br>${subject.getCd()}</label>
+
+                <input type="hidden" name="cd" value="${subject.getCd()}" readonly style="border: none; border-bottom: 1px solid #ddd;" />
+
             </p>
             <p>
                 <label class="form-label">科目名</label>

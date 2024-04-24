@@ -4,80 +4,12 @@
 <c:import url="/common/base.jsp">
 <c:param name="title">得点管理システム</c:param>
 <c:param name="scripts">
-<%@ page import="java.sql.*"%>
-<%@ page import="javax.sql.DataSource"%>
-<%@ page import="org.h2.jdbcx.JdbcDataSource"%>
-
-		<%
-			// H2データベースへの接続情報
-					String url = "jdbc:h2:~/teamc"; // データベースのURL
-					String user = "sa"; // ユーザー名
-					String password = ""; // パスワード
-
-					Connection conn = null;
-					try {
-						// JDBCドライバのロード
-						Class.forName("org.h2.Driver");
-
-						// データベースへの接続
-						conn = DriverManager.getConnection(url, user, password);
-
-						// ここでSQLクエリを実行するなどの処理を行う
-						// ...
-
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					} finally {
-						// データベース接続のクローズ
-						if (conn != null) {
-							try {
-								conn.close();
-							} catch (SQLException e) {
-								e.printStackTrace();
-							}
-						}
-					}
-		%>
-
-	</c:param>
+</c:param>
 <c:param name="content">
-<style>
-.login-form {
-	width: 300px;
-	margin: 0 auto;
-	padding: 20px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-}
 
-.form-group {
-	margin-bottom: 10px;
-}
-
-.form-group label {
-	display: block;
-}
-
-.form-group input[type="text"], .form-group input[type="password"] {
-	width: 100%;
-	padding: 5px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-}
-
-.form-group input[type="checkbox"] {
-	margin-right: 5px;
-}
-
-.form-group button:hover {
-	background-color: #0056b3;
-}
-</style>
-<script>
+		<script>
 			// パスワードの表示/非表示を切り替える関数
-			function togglePasswordVisibility() {
+			function togglePassword() {
 				var passwordInput = document.getElementById('password');
 				var passwordCheckbox = document.getElementById('chk_d_ps');
 				if (passwordCheckbox.checked) {
@@ -88,14 +20,33 @@
 			}
 </script>
 <body>
-<div class="login-container">
-<h2>ログイン</h2>
+<div class="row border mx-3 mb-3 py-2 align-items-center rounded"
+				id="fillter">
+<h2 class="h2 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4"
+					style="text-align: center;">ログイン</h2>
+<div style="text-align: center;">
 <form action="LoginExecute.action" method="post">
-<p>ユーザー名: <input type="text" name="username"></p>
-<p>パスワード: <input type="password" name="password"></p>
-<p><input type="submit" value="ログイン"></p>
+<div>
+<label for="id"></label> <input type="text" id="username"
+								name="username" placeholder="ID" maxlength="20" required
+								style="width: 100%; max-width: 700px height: 40px; margin-bottom: 10px; box-sizing: border-box;">
+</div>
+<div>
+<label for="password"></label> <input type="password"
+								id="password" name="password" placeholder="パスワード" maxlength="20"
+								required maxlength="20" required
+								style="width: 100%; max-width: 700px height: 40px; margin-bottom: 10px; box-sizing: border-box;">
+</div>
+<div>
+<input type="checkbox" id="chk_d_ps" onclick="togglePassword()">
+<label for="chk_d_ps">パスワードを表示</label>
+</div>
+<div>
+<input type="submit" name="login" value="ログイン"
+								style="max-width: 130px; width: 100%; background-color: #5577ff; color: white; text-align: center;">
+</div>
 </form>
-</body>
+</div>
 </div>
 </body>
 </c:param>

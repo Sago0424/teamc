@@ -55,7 +55,7 @@ public class StudentCreateExecuteAction extends Action {
 
         if (exists) {
             // 学生番号が既に存在する場合はエラーメッセージを返す
-            response.sendRedirect("StudentCreate.jsp?error=exists");
+            response.sendRedirect("student_create.jsp?error=exists");
             return;
         }
 
@@ -65,7 +65,7 @@ public class StudentCreateExecuteAction extends Action {
             if (entYear != 0) {
                 success = studentDao.save(student);
             } else {
-                request.getRequestDispatcher("StudentCreate.action").forward(request, response);
+                request.getRequestDispatcher("student_create.action").forward(request, response);
                 return;
             }
         } catch (Exception e) {
@@ -74,10 +74,10 @@ public class StudentCreateExecuteAction extends Action {
 
         if (success) {
             // 登録成功時の処理
-            response.sendRedirect("StudentCreate_done.jsp"); // 登録後の画面にリダイレクト
+            response.sendRedirect("student_create_done.jsp"); // 登録後の画面にリダイレクト
         } else {
             // 登録失敗時の処理
-            response.sendRedirect("StudentCreate.jsp?error=failed"); // 失敗した場合は元のページに戻す
+            response.sendRedirect("student_create.jsp?error=failed"); // 失敗した場合は元のページに戻す
         }
     }
 }

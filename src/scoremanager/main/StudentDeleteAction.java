@@ -27,7 +27,7 @@ List<String> list = cNumDao.filter(teacher.getSchool());
             Student student = studentDao.get(studentNo);
             request.setAttribute("student", student);
             request.setAttribute("class_num_set", list);
-            request.getRequestDispatcher("StudentDelete.jsp").forward(request, response);
+            request.getRequestDispatcher("student_delete.jsp").forward(request, response);
 
 
 

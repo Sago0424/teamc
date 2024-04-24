@@ -32,4 +32,9 @@ public class School implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getSchool() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 }

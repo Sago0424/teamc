@@ -54,11 +54,11 @@ public class StudentUpdateExecuteAction extends Action {
 
         if (success) {
             // 登録成功時の処理
-        	response.sendRedirect("StudentUpdate_done.jsp");
+        	response.sendRedirect("student_update_done.jsp");
 ; // 登録後の画面にリダイレクト
         } else {
             // 登録失敗時の処理
-            response.sendRedirect("StudentUpdate.jsp?error=failed"); // 失敗した場合は元のページに戻す
+            response.sendRedirect("student_update.jsp?error=failed"); // 失敗した場合は元のページに戻す
         }
     }
 }

@@ -35,10 +35,10 @@ public class StudentDeleteExecuteAction extends Action {
 
         if (success) {
             // 削除成功時の処理
-            response.sendRedirect("StudentDelete_done.jsp"); // 削除後の画面にリダイレクト
+            response.sendRedirect("student_delete_done.jsp"); // 削除後の画面にリダイレクト
         } else {
             // 削除失敗時の処理
-            response.sendRedirect("StudentDelete.jsp?error=failed"); // 失敗した場合は元のページに戻す
+            response.sendRedirect("student_delete.jsp?error=failed"); // 失敗した場合は元のページに戻す
         }
     }
 }

@@ -101,6 +101,6 @@ public class StudentCreateAction extends Action {
 		req.setAttribute("ent_year_set", entYearSet);
 
 		//JSPへフォワード 7
-		req.getRequestDispatcher("StudentCreate.jsp").forward(req, res);
+		req.getRequestDispatcher("student_create.jsp").forward(req, res);
 	}
 }

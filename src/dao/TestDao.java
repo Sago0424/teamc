@@ -2,37 +2,80 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import bean.Test;
 
 public class TestDao extends Dao {
-    public boolean save(List<Test> list) {
-        String insertQuery = "INSERT INTO Grades (STUDENT_NO, SUBJECT_CD, SCHOOL_CD, NO, POINT, CLASS_NUM) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection connection = getConnection(); // DaoクラスからConnectionを取得
-             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
 
-            for (Test test : list) {
-                preparedStatement.setInt(1, test.getStudent().getStudentNo());
-                preparedStatement.setString(2, test.getSubject().getSubjectCode());
-                preparedStatement.setString(3, test.getSchool().getSchool());
-                preparedStatement.setInt(4, test.getNo());
-                preparedStatement.setInt(5, test.getPoint());
-                preparedStatement.setString(6, test.getClassNum());
-                preparedStatement.addBatch();
-                preparedStatement.clearParameters(); // パラメータをクリア
+    // テーブル名やカラム名は適切に変更してください
+    private static final String SELECT_ALL_TESTS = "SELECT * FROM TEST";
+    private static final String INSERT_TEST = "INSERT INTO TEST (STUDENT_NO, SUBJECT_CD, SCHOOL_CD, NO, POINT, CLASS_NUM) VALUES (?, ?, ?, ?, ?, ?)";
+
+    // 全てのテスト情報を取得するメソッド
+    public List<Test> getAllTests() throws Exception {
+        List<Test> tests = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(SELECT_ALL_TESTS);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Test test = new Test();
+                test.setStudentNo(resultSet.getInt("STUDENT_NO"));
+                test.setSubjectCd(resultSet.getString("SUBJECT_CD"));
+                test.setSchoolCd(resultSet.getString("SCHOOL_CD"));
+                test.setNo(resultSet.getInt("NO"));
+                test.setPoint(resultSet.getInt("POINT"));
+                test.setClassNum(resultSet.getString("CLASS_NUM"));
+                tests.add(test);
             }
-
-            int[] result = preparedStatement.executeBatch();
-            return result.length == list.size();
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
-        } catch (Exception e1) {
-			// TODO 自動生成された catch ブロック
-			e1.printStackTrace();
-		}
-		return false;
+            throw e;
+        } finally {
+            close(resultSet, statement, connection);
+        }
+
+        return tests;
     }
+
+    private void close(ResultSet resultSet, PreparedStatement statement, Connection connection) {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
+
+	// テスト情報を保存するメソッド
+    public boolean save(Test test) throws Exception {
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(INSERT_TEST);
+            statement.setInt(1, test.getStudentNo());
+            statement.setString(2, test.getSubjectCd());
+            statement.setString(3, test.getSchoolCd());
+            statement.setInt(4, test.getNo());
+            statement.setInt(5, test.getPoint());
+            statement.setString(6, test.getClassNum());
+
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            close(null, statement, connection);
+        }
+    }
+
+    // 他のメソッドを追加する場合はここに記述してください
 }

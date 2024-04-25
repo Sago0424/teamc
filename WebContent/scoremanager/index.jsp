@@ -14,4 +14,3 @@ location.href = "/teamC/scoremanager/Login.action";
 
 </body>
 </html>
-a

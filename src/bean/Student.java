@@ -117,4 +117,9 @@ public class Student implements Serializable {
 		return year - entYear + 1;
 	}
 
+	public int getStudentNo() {
+		// TODO 自動生成されたメソッド・スタブ
+		return 0;
+	}
+
 }

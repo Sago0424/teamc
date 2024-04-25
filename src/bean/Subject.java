@@ -46,5 +46,10 @@ public class Subject implements Serializable {
 		this.id = id;
 	}
 
+	public String getSubjectCode() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
 
 }

@@ -104,7 +104,7 @@ public class TestDao extends Dao {
             e.printStackTrace();
             throw e;
         } finally {
-            close(resultSet, statement, connection); // Implement your close() method
+            close(resultSet, statement, connection);
         }
 
         return filteredTests;

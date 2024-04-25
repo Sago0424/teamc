@@ -76,6 +76,37 @@ public class TestDao extends Dao {
             close(null, statement, connection);
         }
     }
+    public List<Test> filterTests(int studentNo) throws Exception {
+        List<Test> filteredTests = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
 
-    // 他のメソッドを追加する場合はここに記述してください
+        try {
+            connection = getConnection(); // Implement your getConnection() method
+            // Assuming you have a table named "TEST" with columns "STUDENT_NO", "SUBJECT_CD", etc.
+            String filterQuery = "SELECT * FROM TEST WHERE STUDENT_NO = ?";
+            statement = connection.prepareStatement(filterQuery);
+            statement.setInt(1, studentNo);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Test test = new Test();
+                test.setStudentNo(resultSet.getInt("STUDENT_NO"));
+                test.setSubjectCd(resultSet.getString("SUBJECT_CD"));
+                test.setSchoolCd(resultSet.getString("SCHOOL_CD"));
+                test.setNo(resultSet.getInt("NO"));
+                test.setPoint(resultSet.getInt("POINT"));
+                test.setClassNum(resultSet.getString("CLASS_NUM"));
+                filteredTests.add(test);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            close(resultSet, statement, connection); // Implement your close() method
+        }
+
+        return filteredTests;
+    }
 }

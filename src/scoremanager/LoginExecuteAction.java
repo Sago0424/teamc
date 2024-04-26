@@ -55,7 +55,7 @@ public class LoginExecuteAction extends Action {
             req.setAttribute("id", id);
 
             //リダイレクト
-            url = "/error.jsp";
+            url = "error.jsp";
             res.sendRedirect(url);
         }
     }

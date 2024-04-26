@@ -27,8 +27,8 @@
 				<div style="text-align: center;">
 					<form action="LoginExecute.action" method="post">
 						<div>
-							<label for="id"></label> <input type="text" id="username"
-								name="username" placeholder="ID" maxlength="20" required
+							<label for="id"></label> <input type="text" id="id"
+								name="id" placeholder="ID" maxlength="20" required
 								style="width: 100%; max-width: 700px height: 40px; margin-bottom: 10px; box-sizing: border-box;">
 						</div>
 						<div>

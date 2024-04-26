@@ -16,11 +16,11 @@ import bean.Test;
 public class TestDao {
 
 	// テーブル名やカラム名は適切に変更してください
-	private static final String SELECT_ALL_TESTS = "SELECT * FROM TEST";
+	private static final String SELECT_ALL_TESTS = "SELECT * FROM TEST WHERE NO=?";
 	private static final String INSERT_TEST = "INSERT INTO TEST (STUDENT_NO, SUBJECT_CD, SCHOOL_CD, NO, POINT, CLASS_NUM) VALUES (?, ?, ?, ?, ?, ?)";
 	// 全てのテスト情報を取得するメソッド
 	public List<Test> getAllTests() throws Exception {
-		List<Test> tests = new ArrayList<>();
+		List<Test> list = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
@@ -29,19 +29,21 @@ public class TestDao {
 			connection = getConnection();
 			statement = connection.prepareStatement(SELECT_ALL_TESTS);
 			resultSet = statement.executeQuery();
+			School school = new School();
+			Test test = new Test();
+			Student student = new Student();
+			Subject subject = new Subject();
 
-			while (resultSet.next()) {
-				Test test = new Test();
-				Student student = new Student();
-				test.setStudent(student);
-				Subject subject = new Subject();
-				test.setSubject(subject);
-				School school = new School();
-				test.setSchool(school);
+			if (resultSet.next()) {
+				test.setStudent(student.get(resultSet.getString("student_no")));
+				test.setSubject(subject.get(resultSet.getString("subject_cd")));
+				test.setSchool(school.get(resultSet.getString("school_cd")));
 				test.setNo(resultSet.getInt("NO"));
 				test.setPoint(resultSet.getInt("POINT"));
 				test.setClassNum(resultSet.getString("CLASS_NUM"));
-				tests.add(test);
+				list.add(test);
+			}else{
+				test = null;
 			}
 
 		} catch (SQLException e) {
@@ -51,7 +53,7 @@ public class TestDao {
 			close(resultSet, statement, connection);
 		}
 
-		return tests;
+		return list;
 	}
 
 	// テスト情報を保存するメソッド
@@ -74,6 +76,8 @@ public class TestDao {
 			close(null, statement, connection);
 		}
 	}
+
+	private String baseSql = "select * from test where school_cd=? and subject_cd=?";
 
 	public List<Test> filter(int studentNo, String subjectCd) throws Exception {
 		List<Test> tests = new ArrayList<>();
@@ -119,6 +123,82 @@ public class TestDao {
 		return DriverManager.getConnection(null);
 	}
 
+	private List<Test> postFilter(ResultSet rSet, School school, Subject subject) throws Exception {
+		// リストを初期化
+		List<Test> list = new ArrayList<>();
+		try {
+			// リザルトセットを全権走査
+			while (rSet.next()) {
+				// 学生インスタンスを初期化
+				Test test = new Test();
+				// 学生インスタンスに検索結果をセット
+				test.setNo(rSet.getInt("no"));
+				test.setPoint(rSet.getInt("name"));
+				test.setClassNum(rSet.getString("class_num"));
+				test.setSubject(subject);
+				test.setSchool(school);
+				// リストに追加
+				list.add(test);
+			}
+		} catch (SQLException | NullPointerException e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	public List<Test> filter(School school, Subject subject, String no, String name, Integer classnum) throws Exception {
+		// リストを初期化
+		List<Test> list = new ArrayList<>();
+		// コネクションを確立
+		Connection connection = getConnection();
+		// プリペアードステートメント
+		PreparedStatement statement = null;
+		// リザルトセット
+		ResultSet rSet = null;
+		// SQL文の条件
+		String condition = "and school_cd=? and class_num=?";
+		// SQL文のソート
+		String order = " order by no asc";
+
+
+		try {
+			// プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement(baseSql + condition + order);
+			// プリペアードステートメントに学校コードをバインド
+			statement.setString(1, school.getCd());
+			// プリペアードステートメントに入学年度をバインド
+			statement.setInt(2, classnum);
+			// プリペアードステートメントにクラス番号をバインド
+			statement.setString(3, subject.getCd());
+			statement.setString(4, no);
+			statement.setString(5, name);
+			// プライベートステートメントを実行
+			rSet = statement.executeQuery();
+			// リストへの格納処理を実行
+			list = postFilter(rSet, school, subject);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			// プリペアードステートメントを閉じる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			// コネクションを閉じる
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+
+		return list;
+	}
 	// リソースを閉じるヘルパーメソッド
 	private void close(ResultSet resultSet, PreparedStatement statement, Connection connection) {
 		try {

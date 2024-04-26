@@ -37,4 +37,9 @@ public class School implements Serializable {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
+
+	public School get(String string) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 }

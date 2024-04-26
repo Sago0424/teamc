@@ -51,5 +51,10 @@ public class Subject implements Serializable {
 		return null;
 	}
 
+	public Subject get(String string) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
 
 }

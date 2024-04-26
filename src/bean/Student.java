@@ -122,4 +122,9 @@ public class Student implements Serializable {
 		return 0;
 	}
 
+	public Student get(String string) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
 }

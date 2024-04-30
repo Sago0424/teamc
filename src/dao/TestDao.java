@@ -105,7 +105,6 @@ public class TestDao extends Dao{
 		// とってきたデータの数分ループ
 
 
-
 		// listを返す
 		return list;
 	}
@@ -270,7 +269,6 @@ public class TestDao extends Dao{
 		// とってきたデータの数分ループ
 
 
-
 		// listを返す
 		if(count > 0){
 		return true;
@@ -324,4 +322,82 @@ public class TestDao extends Dao{
 	}
 
 
+
+
+
+	public List<Subject> getAllSubjects() throws Exception {
+	    List<Subject> subjects = new ArrayList<>();
+	    Connection connection = null;
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
+
+	    try {
+	        connection = getConnection();
+	        statement = connection.prepareStatement("SELECT * FROM subject");
+	        resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	            Subject subject = new Subject();
+	            subject.setCd(resultSet.getString("subject_cd"));
+	            subject.setName(resultSet.getString("subject_name"));
+	            // 他の属性も必要に応じて設定
+
+	            subjects.add(subject);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        throw e;
+	    } finally {
+	        if (resultSet != null) {
+	            resultSet.close();
+	        }
+	        if (statement != null) {
+	            statement.close();
+	        }
+	        if (connection != null) {
+	            connection.close();
+	        }
+	    }
+
+	    return subjects;
+	}
+
+
+
+	public List<Integer> setAllno() throws Exception {
+	    List<Integer> numbers = new ArrayList<>();
+	    Connection connection = null;
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
+
+	    try {
+	        connection = getConnection();
+	        statement = connection.prepareStatement("SELECT * FROM test");
+	        resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	            int number = resultSet.getInt("no");
+	            numbers.add(number);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        throw e;
+	    } finally {
+	        if (resultSet != null) {
+	            resultSet.close();
+	        }
+	        if (statement != null) {
+	            statement.close();
+	        }
+	        if (connection != null) {
+	            connection.close();
+	        }
+	    }
+
+	    return numbers;
+	}
 }
+
+
+
+

@@ -42,9 +42,9 @@ input[type="submit"] {
 
 			</p>
 			<p>
-				<label class="form-label">科目名</label> <input type="text" name="name"
+				<label class="form-label">科目名<br><input type="text" name="name"
 					placeholder="科目名を入力してください" value="${subject.getName()}" required
-					maxlength="20" />
+					maxlength="20" /></label>
 			</p>
 			<input type="submit" value="変更" />
 			<div style="margin-top: 20px;">

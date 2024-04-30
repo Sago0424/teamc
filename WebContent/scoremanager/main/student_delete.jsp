@@ -3,7 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/common/base.jsp">
-	<c:param name="title" value="得点管理システム - 学生情報削除" />
+	<c:param name="title" value="得点管理システム" />
 	<c:param name="scripts"></c:param>
 	<c:param name="content">
 		<h2>学生情報削除</h2>

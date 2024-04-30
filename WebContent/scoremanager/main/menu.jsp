@@ -15,7 +15,7 @@
 				class="col d-flex flex-column align-items-center justify-content-center mx-2 rounded shadow"
 				style="height: 10rem; background-color: #bdb;">
 				<a style="font-size: 1.5em;">成績管理</a> <a href="TestRegist.action"
-					style="font-size: 1.5em;">成績登録</a> <a href="#"
+					style="font-size: 1.5em;">成績登録</a> <a href="TestList.action"
 					style="font-size: 1.5em;">成績参照</a>
 			</div>
 			<div

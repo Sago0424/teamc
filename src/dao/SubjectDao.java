@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.Subject;
+import bean.Test;
 
 public class SubjectDao extends Dao {
 
@@ -149,4 +150,30 @@ public class SubjectDao extends Dao {
             e.printStackTrace();
         }
     }
+    public List<Test> getAllRounds() throws Exception {
+        List<Test> rounds = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement("SELECT * FROM TEST");
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Test test = new Test();
+                test.setNo(resultSet.getInt("NO"));
+                rounds.add(test);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            close(resultSet, statement, connection);
+        }
+
+        return rounds;
+    }
+
 }

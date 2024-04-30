@@ -40,10 +40,10 @@
 						<label class="form-label" for="student-f3-select">科目</label> <select
 							class="form-select " id="student-f3-select" name="f3">
 							<option value="0">--------</option>
-							<c:forEach var="subject.cd" items="${class_num_set}">
+							<c:forEach var="subject.cd" items="${subjects}">
 								<%-- 現在のsubject.cdと選択されていたf3が一致していた場合selectedを追記 --%>
 								<option value="${subject.cd}"
-									<c:if test="${subject.cd==f3}">selected</c:if>>${subject.cd}</option>
+									<c:if test="${subject.cd==f3}">selected</c:if>>${subject.name}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -51,9 +51,9 @@
 						<label class="form-label" for="student-f4-select">回数</label> <select
 							class="form-select " id="student-f4-select" name="f4">
 							<option value="0">--------</option>
-							<c:forEach var="num" items="${class_num_set}">
+							<c:forEach var="num" items="${rounds}">
 								<%-- 現在のnumと選択されていたf4が一致していた場合selectedを追記 --%>
-								<option value="${num}" <c:if test="${num==f4}">selected</c:if>>${num}</option>
+								<option value="${num}" <c:if test="${num==f4}">selected</c:if>>${test.no}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -64,10 +64,15 @@
 				</div>
 			</form>
 			<c:choose>
+				<c:when test="${not empty students}">
+					<!-- 学生情報が存在する場合の処理 -->
+					<!-- 例えば、学生情報を表示するテーブルやリストなど -->
+				</c:when>
 				<c:otherwise>
 					<div>学生情報が存在しませんでした</div>
 				</c:otherwise>
 			</c:choose>
+
 		</section>
 	</c:param>
 </c:import>

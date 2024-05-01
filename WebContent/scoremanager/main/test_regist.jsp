@@ -16,27 +16,27 @@
 			<form method="get">
 				<div class="row border mx-3 mb-3 py-2 align-items-center rounded"
 					id="filter">
-					<div class="col-4">
-						<label class="form-label" for="student-f1-select">入学年度 </label> <select
-							class="form-select " id="student-f1-select" name="f1">
+					<div class="col-3">
+						<label class="form-label" for="student-f1-select">入学年度</label> <select
+							class="form-select" id="student-f1-select" name="f1">
 							<option value="0">--------</option>
 							<c:forEach var="year" items="${ent_year_set}">
 								<option value="${year}" <c:if test="${year==f1}">selected</c:if>>${year}</option>
 							</c:forEach>
 						</select>
 					</div>
-					<div class="col-4">
+					<div class="col-3">
 						<label class="form-label" for="student-f2-select">クラス</label> <select
-							class="form-select " id="student-f2-select" name="f2">
+							class="form-select" id="student-f2-select" name="f2">
 							<option value="0">--------</option>
 							<c:forEach var="num" items="${class_num_set}">
 								<option value="${num}" <c:if test="${num==f2}">selected</c:if>>${num}</option>
 							</c:forEach>
 						</select>
 					</div>
-					<div class="col-4">
-						<label class="form-label" for="student-f4-select">科目</label> <select
-							class="form-select " id="student-f4-select" name="f3">
+					<div class="col-3">
+						<label class="form-label" for="student-f3-select">科目</label> <select
+							class="form-select" id="student-f3-select" name="f3">
 							<option value="0">--------</option>
 							<c:forEach var="subject" items="${subjects_set}">
 								<option value="${subject.cd}"
@@ -44,23 +44,18 @@
 							</c:forEach>
 						</select>
 					</div>
-				</div>
-				<div class="row border mx-3 mb-3 py-2 align-items-center rounded"
-					id="filter">
-					<div class="col-4">
-						<label class="form-label" for="student-f5-select">回数</label> <select
-							class="form-select " id="student-f5-select" name="f5">
+					<div class="col-3">
+						<label class="form-label" for="student-f4-select">回数</label> <select
+							class="form-select" id="student-f4-select" name="f4">
 							<option value="0">--------</option>
 							<c:forEach var="test" items="${number_set}">
 								<option value="${test}"
-									<c:if test="${test == f5}">selected</c:if>>${test}</option>
+									<c:if test="${test == f4}">selected</c:if>>${test}</option>
 							</c:forEach>
-
-
 						</select>
 					</div>
 				</div>
-				<div class="col-2 text-center">
+				<div class="text-center">
 					<button class="btn btn-secondary" id="filter-button">検索</button>
 				</div>
 				<div class="mt-2 text-warning">${errors.get("f1")}</div>

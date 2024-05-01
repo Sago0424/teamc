@@ -5,8 +5,12 @@
 	<c:param name="title">得点管理システム</c:param>
 	<c:param name="scripts"></c:param>
 	<c:param name="content">
-		<h2>ログアウト</h2>
-		<p>ログアウトしました</p>
-		<a href="../Login.action" class="btn">ログイン</a>
+		<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">ログアウト</h2>
+		<p
+			style="background-color: #7ebea5; padding: 8px; width: 100%; text-align: center;">
+			ログアウトしました</p>
+			<br>
+			<br>
+		<a href="../Login.action" class="nav-item">ログイン</a>
 	</c:param>
 </c:import>

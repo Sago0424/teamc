@@ -7,8 +7,11 @@
 		<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">学生情報登録</h2>
 		<p
 			style="background-color: #7ebea5; padding: 8px; width: 100%; text-align: center;">
-			登録が完了しました。</p>
-
+			登録が完了しました</p>
+			<br>
+			<br>
+			<br>
+			<br>
 		<a href="StudentCreate.action" class="nav-item"
 			style="margin-right: 60px;">戻る</a>
 		<a href="StudentList.action" class="nav-item">学生一覧</a>

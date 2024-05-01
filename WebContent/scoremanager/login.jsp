@@ -27,15 +27,15 @@
 				<div style="text-align: center;">
 					<form action="LoginExecute.action" method="post">
 						<div>
-							<label for="id"></label> <input type="text" id="id"
-								name="id" placeholder="ID" maxlength="20" required
-								style="width: 100%; max-width: 700px height: 40px; margin-bottom: 10px; box-sizing: border-box;">
+							<input type="text" id="id" name="id" placeholder="ID"
+								maxlength="20" required
+								style="width: 80%; max-width: 600px; height: 50px; margin-bottom: 10px; box-sizing: border-box;">
 						</div>
 						<div>
-							<label for="password"></label> <input type="password"
-								id="password" name="password" placeholder="パスワード" maxlength="20"
-								required maxlength="20" required
-								style="width: 100%; max-width: 700px height: 40px; margin-bottom: 10px; box-sizing: border-box;">
+							<input type="password" id="password" name="password"
+								placeholder="パスワード" maxlength="20" required maxlength="20"
+								required
+								style="width: 80%; max-width: 600px; height: 50px; margin-bottom: 10px; box-sizing: border-box;">
 						</div>
 						<div>
 							<input type="checkbox" id="chk_d_ps" onclick="togglePassword()">

@@ -6,7 +6,7 @@
 	<c:param name="scripts"></c:param>
 	<c:param name="content">
 		<div style="background-color:; margin: -20px; padding: 20px;">
-			<h2 style="text-align:; color: #4a4a4a;">学生情報登録</h2>
+			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報登録</h2>
 			<form action="SubjectCreateExecute.action" method="post"
 				style="max-width: 600px;">
 				<div style="margin-bottom: 20px;">
@@ -23,8 +23,8 @@
 						style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
 				</div>
 				<div>
-					<input type="submit" value="登録して終了"
-						style="padding: 10px 20px; border-radius: 5px; border: none; background-color: #444444; color: white; cursor: pointer;">
+					<input type="submit" value="登録"
+						style="padding: 10px; border: none; border-radius: 4px; cursor: pointer; background-color: #5577ff; color: white; text-align: center; max-width: 130px;">
 				</div>
 				<div style="margin-top: 20px;">
 					<a href="SubjectList.action" class="nav-item">戻る</a>

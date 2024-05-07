@@ -6,8 +6,15 @@
 	<c:param name="scripts"></c:param>
 	<c:param name="content">
 		<style>
+
+
+p {
+	font-size: 16px;
+	line-height: 1.6;
+	color: #555;
 }
-input[type="text"] {
+
+input[type="text"], form-select {
 	width: 100%;
 	padding: 10px;
 	margin-bottom: 20px;
@@ -20,17 +27,14 @@ input[type="submit"] {
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
-	background-color: #5577ff;
-	color: white;
-	text-align: center;
-	max-width: 130px;
 }
 
 .form-label {
-	padding: 10px;
-	display: block;
+	width: 100%;
+	padding: 5px;
 	margin-bottom: 5px;
-	color: #666;
+	border-radius: 4px;
+
 }
 </style>
 		<h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">科目情報変更</h2>
@@ -46,7 +50,8 @@ input[type="submit"] {
 				<input type="text" name="name" placeholder="科目名を入力してください"
 					value="${subject.getName()}" required maxlength="20" /></label>
 			</p>
-			<input type="submit" value="変更" />
+			<input type="submit" value="変更"
+						style="padding: 10px; border: none; border-radius: 4px; cursor: pointer; background-color: #5577ff; color: white; text-align: center; max-width: 130px;">
 			<div style="margin-top: 20px;">
 				<a href="SubjectList.action" class="nav-item">戻る</a>
 			</div>

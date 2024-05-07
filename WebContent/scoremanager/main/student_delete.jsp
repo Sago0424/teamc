@@ -16,6 +16,9 @@
 			<p>クラス: ${student.getClassNum()}</p>
 			<p>在学中: ${student.isAttend() ? '〇' : '×'}</p>
 			<input type="submit" value="削除する">
+			<div style="margin-top: 20px;">
+				<a href="StudentList.action" class="nav-item">戻る</a>
+			</div>
 		</form>
 	</c:param>
 </c:import>

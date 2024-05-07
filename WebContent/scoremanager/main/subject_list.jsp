@@ -21,7 +21,7 @@
 					<div>検索結果：${subjects.size()}件</div>
 					<table class="table table-hover">
 						<tr>
-							<th>科目ID</th>
+							<th>科目コード</th>
 							<th>科目名</th>
 							<th></th>
 							<th></th>

@@ -12,59 +12,60 @@ import bean.Test;
 
 public class SubjectDao extends Dao {
 
-    public List<Subject> getAllSubjects() throws Exception {
-        List<Subject> subjects = new ArrayList<>();
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
+	public List<Subject> getAllSubjects() throws Exception {
+	    List<Subject> subjects = new ArrayList<>();
+	    Connection connection = null;
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
 
-        try {
-            connection = getConnection();
-            statement = connection.prepareStatement("SELECT * FROM SUBJECT");
-            resultSet = statement.executeQuery();
+	    try {
+	        connection = getConnection();
+	        statement = connection.prepareStatement("SELECT * FROM SUBJECT WHERE deleted = false");
+	        resultSet = statement.executeQuery();
 
-            while (resultSet.next()) {
-                Subject subject = new Subject();
-                subject.setCd(resultSet.getString("CD"));
-                subject.setName(resultSet.getString("NAME"));
-                subjects.add(subject);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
-        } finally {
-            close(resultSet, statement, connection);
-        }
+	        while (resultSet.next()) {
+	            Subject subject = new Subject();
+	            subject.setCd(resultSet.getString("CD"));
+	            subject.setName(resultSet.getString("NAME"));
+	            subjects.add(subject);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        throw e;
+	    } finally {
+	        close(resultSet, statement, connection);
+	    }
 
-        return subjects;
-    }
+	    return subjects;
+	}
 
-    public Subject get(String subjectCd) throws Exception {
-        Subject subject = null;
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
+	public Subject get(String subjectCd) throws Exception {
+	    Subject subject = null;
+	    Connection connection = null;
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
 
-        try {
-            connection = getConnection();
-            statement = connection.prepareStatement("SELECT * FROM SUBJECT WHERE CD = ?");
-            statement.setString(1, subjectCd);
-            resultSet = statement.executeQuery();
+	    try {
+	        connection = getConnection();
+	        statement = connection.prepareStatement("SELECT * FROM SUBJECT WHERE CD = ? AND deleted = false");
+	        statement.setString(1, subjectCd);
+	        resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
-                subject = new Subject();
-                subject.setCd(resultSet.getString("CD"));
-                subject.setName(resultSet.getString("NAME"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
-        } finally {
-            close(resultSet, statement, connection);
-        }
+	        if (resultSet.next()) {
+	            subject = new Subject();
+	            subject.setCd(resultSet.getString("CD"));
+	            subject.setName(resultSet.getString("NAME"));
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        throw e;
+	    } finally {
+	        close(resultSet, statement, connection);
+	    }
 
-        return subject;
-    }
+	    return subject;
+	}
+
 
     public boolean update(Subject subject) throws Exception {
         boolean success = false;
@@ -96,7 +97,7 @@ public class SubjectDao extends Dao {
 
         try {
             connection = getConnection();
-            statement = connection.prepareStatement("DELETE FROM SUBJECT WHERE CD = ?");
+            statement = connection.prepareStatement("UPDATE SUBJECT SET deleted = true WHERE CD = ?");
             statement.setString(1, cd);
 
             int rowsAffected = statement.executeUpdate();
@@ -110,6 +111,7 @@ public class SubjectDao extends Dao {
 
         return success;
     }
+
 
     public boolean save(Subject subject) throws Exception {
         boolean success = false;

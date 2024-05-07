@@ -5,7 +5,17 @@
 	<c:param name="title" value="得点管理システム" />
 
 	<c:param name="content">
-		<h2>科目情報削除確認</h2>
+		<style>
+input[type="submit"] {
+	background-color: #dc143c;
+	color: white;
+	border: none;
+	padding: 7px 20px ;
+	font-size: 16px;
+	border-radius: 5px;
+}
+</style>
+		<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報削除確認</h2>
 		<form action="SubjectDeleteExecute.action" method="post"
 			onsubmit="return confirmDelete()">
 			<p>
@@ -15,6 +25,8 @@
 
 			<input type="submit" value="削除" />
 		</form>
+		<br>
+			<br>
 		<div style="margin-top: 20px;">
 			<a href="SubjectList.action" class="nav-item">戻る</a>
 		</div>

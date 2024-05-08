@@ -7,65 +7,112 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bean.School;
 import bean.Subject;
-import bean.Test;
 
 public class SubjectDao extends Dao {
 
-	public List<Subject> getAllSubjects() throws Exception {
-	    List<Subject> subjects = new ArrayList<>();
-	    Connection connection = null;
-	    PreparedStatement statement = null;
-	    ResultSet resultSet = null;
+    public List<Subject> getAllSubjects() throws Exception {
+        List<Subject> subjects = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
 
-	    try {
-	        connection = getConnection();
-	        statement = connection.prepareStatement("SELECT * FROM SUBJECT WHERE deleted = false");
-	        resultSet = statement.executeQuery();
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement("SELECT * FROM SUBJECT");
+            resultSet = statement.executeQuery();
 
-	        while (resultSet.next()) {
-	            Subject subject = new Subject();
-	            subject.setCd(resultSet.getString("CD"));
-	            subject.setName(resultSet.getString("NAME"));
-	            subjects.add(subject);
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        throw e;
-	    } finally {
-	        close(resultSet, statement, connection);
-	    }
+            while (resultSet.next()) {
+                Subject subject = new Subject();
+                subject.setCd(resultSet.getString("CD"));
+                subject.setName(resultSet.getString("NAME"));
+                subjects.add(subject);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            close(resultSet, statement, connection);
+        }
 
-	    return subjects;
-	}
+        return subjects;
+    }
 
-	public Subject get(String subjectCd) throws Exception {
-	    Subject subject = null;
-	    Connection connection = null;
-	    PreparedStatement statement = null;
-	    ResultSet resultSet = null;
+    public Subject get(String subjectCd) throws Exception {
+        Subject subject = null;
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
 
-	    try {
-	        connection = getConnection();
-	        statement = connection.prepareStatement("SELECT * FROM SUBJECT WHERE CD = ? AND deleted = false");
-	        statement.setString(1, subjectCd);
-	        resultSet = statement.executeQuery();
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement("SELECT * FROM SUBJECT WHERE CD = ?");
+            statement.setString(1, subjectCd);
+            resultSet = statement.executeQuery();
 
-	        if (resultSet.next()) {
-	            subject = new Subject();
-	            subject.setCd(resultSet.getString("CD"));
-	            subject.setName(resultSet.getString("NAME"));
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        throw e;
-	    } finally {
-	        close(resultSet, statement, connection);
-	    }
+            if (resultSet.next()) {
+                subject = new Subject();
+                subject.setCd(resultSet.getString("CD"));
+                subject.setName(resultSet.getString("NAME"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            close(resultSet, statement, connection);
+        }
 
-	    return subject;
-	}
+        return subject;
+    }
 
+    public List<Subject> filter(School school) throws Exception {
+        List<Subject> sublist = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet rSet = null;
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement("select cd, name from subject where school_cd=? order by name");
+            statement.setString(1, school.getCd());
+            rSet = statement.executeQuery();
+
+            while (rSet.next()) {
+                Subject subject = new Subject();
+                subject.setCd(rSet.getString("cd"));
+                subject.setName(rSet.getString("name"));
+                subject.setSchool(school);
+                sublist.add(subject);
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            if (rSet != null) {
+                try {
+                    rSet.close();
+                } catch (SQLException sqle) {
+                    throw sqle;
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException sqle) {
+                    throw sqle;
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException sqle) {
+                    throw sqle;
+                }
+            }
+        }
+
+        return sublist;
+    }
 
     public boolean update(Subject subject) throws Exception {
         boolean success = false;
@@ -97,7 +144,7 @@ public class SubjectDao extends Dao {
 
         try {
             connection = getConnection();
-            statement = connection.prepareStatement("UPDATE SUBJECT SET deleted = true WHERE CD = ?");
+            statement = connection.prepareStatement("DELETE FROM SUBJECT WHERE CD = ?");
             statement.setString(1, cd);
 
             int rowsAffected = statement.executeUpdate();
@@ -111,7 +158,6 @@ public class SubjectDao extends Dao {
 
         return success;
     }
-
 
     public boolean save(Subject subject) throws Exception {
         boolean success = false;
@@ -152,30 +198,4 @@ public class SubjectDao extends Dao {
             e.printStackTrace();
         }
     }
-    public List<Test> getAllRounds() throws Exception {
-        List<Test> rounds = new ArrayList<>();
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-
-        try {
-            connection = getConnection();
-            statement = connection.prepareStatement("SELECT * FROM TEST");
-            resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                Test test = new Test();
-                test.setNo(resultSet.getInt("NO"));
-                rounds.add(test);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
-        } finally {
-            close(resultSet, statement, connection);
-        }
-
-        return rounds;
-    }
-
 }

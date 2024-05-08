@@ -43,7 +43,7 @@ public class TestRegistAction extends Action {
 	    entYearStr = req.getParameter("f1");
 	    classNum = req.getParameter("f2");
 	    subjects = req.getParameter("f3");
-	    number = req.getParameter("f5");
+	    number = req.getParameter("f4");
 
 	    if (entYearStr != null) {
 	        entYear = Integer.parseInt(entYearStr);
@@ -69,7 +69,7 @@ public class TestRegistAction extends Action {
 	    req.setAttribute("f1", entYear);
 	    req.setAttribute("f2", classNum);
 	    req.setAttribute("f3", subjects);
-	    req.setAttribute("f5", number);
+	    req.setAttribute("f4", number);
 
 
 	    req.setAttribute("students", students);

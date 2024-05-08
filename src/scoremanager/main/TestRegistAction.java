@@ -38,6 +38,9 @@ public class TestRegistAction extends Action {
 	    SubjectDao subjectDao = new SubjectDao();
 	    TestDao testDao = new TestDao();
 	    Map<String, String> errors = new HashMap<>();
+	    String subName = ""; // 科目名を取得するロジックを実装
+        String testNumber = ""; // 回数を取得するロジックを実装
+
 
 
 	    entYearStr = req.getParameter("f1");
@@ -80,6 +83,8 @@ public class TestRegistAction extends Action {
 	    req.setAttribute("number_set",testDao.setAllno());
 
 	    req.getRequestDispatcher("test_regist.jsp").forward(req, res);
+	    req.setAttribute("subName", subName);
+        req.setAttribute("testNumber", testNumber);
 	}
 
 }

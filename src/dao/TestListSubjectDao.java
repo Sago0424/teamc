@@ -19,7 +19,7 @@ public class TestListSubjectDao extends Dao {
             "FROM `student` s " +
             "LEFT JOIN `test` t ON s.no = t.student_no " +
             "LEFT JOIN `subject` sub ON sub.cd = t.subject_cd " +
-            "WHERE s.ent_year = ? AND s.class_num = ? AND sub.name = ? GROUP BY s.ent_year, s.class_num, s.no, s.name";
+            "WHERE s.ent_year = ? AND s.class_num = ? AND sub.name = ? GROUP BY s.ent_year, s.class_num, s.no, s.name ORDER BY s.no ASC";
 
     private List<TestListSubject> postFilter(ResultSet rSet) throws SQLException {
         List<TestListSubject> list = new ArrayList<>();

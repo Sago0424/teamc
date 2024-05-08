@@ -14,7 +14,7 @@ public class TestListStudentDao extends Dao {
 
     private final String baseSql = "SELECT sub.name, sub.cd, t.no, t.point " +
             "FROM test t LEFT JOIN student s ON s.no = t.student_no LEFT JOIN subject sub ON sub.cd = t.subject_cd " +
-            "WHERE s.no = ?";
+            "WHERE s.no = ? order by sub.cd asc, t.no ";
 
     private List<TestListStudent> postFilter(ResultSet rSet) throws SQLException {
         List<TestListStudent> list = new ArrayList<>();
@@ -39,28 +39,6 @@ public class TestListStudentDao extends Dao {
             connection = getConnection();
             statement = connection.prepareStatement(baseSql);
             statement.setString(1, student.getNo());
-            rSet = statement.executeQuery();
-            list = postFilter(rSet);
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            closeResources(connection, statement, rSet);
-        }
-        return list;
-    }
-
-    public List<TestListStudent> filterBySubject(Student student, String subjectCd) throws Exception {
-        List<TestListStudent> list = new ArrayList<>();
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet rSet = null;
-
-        try {
-            connection = getConnection();
-            String sql = baseSql + " AND sub.cd = ?";
-            statement = connection.prepareStatement(sql);
-            statement.setString(1, student.getNo());
-            statement.setString(2, subjectCd);
             rSet = statement.executeQuery();
             list = postFilter(rSet);
         } catch (SQLException e) {

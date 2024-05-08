@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!--taglibディレクティブの記述-->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/common/base.jsp">
 	<c:param name="title">
@@ -35,8 +34,8 @@
 									<td>${sub.classNum}</td>
 									<td>${sub.no}</td>
 									<td>${sub.name}</td>
-									<td>${sub.point1}</td>
-									<td>${sub.point2}</td>
+									<td>${sub.point1 == null or sub.point1 eq '' ? '-' : sub.point1}</td>
+									<td>${sub.point2 == null or sub.point2 eq '' ? '-' : sub.point2}</td>
 								</tr>
 							</c:forEach>
 						</tbody>

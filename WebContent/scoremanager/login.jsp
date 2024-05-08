@@ -27,6 +27,15 @@
 				<div style="text-align: center;">
 					<form action="LoginExecute.action" method="post">
 						<div>
+							<c:if test="${not empty errors}">
+								<div style="color: black; margin-top: 10px;">
+									<c:forEach items="${errors}" var="error">
+										<p>ログインに失敗しました。IDまたはパスワードが正しくありません。</p>
+									</c:forEach>
+								</div>
+							</c:if>
+						</div>
+						<div>
 							<input type="text" id="id" name="id" placeholder="ID"
 								maxlength="20" required
 								style="width: 80%; max-width: 600px; height: 50px; margin-bottom: 10px; box-sizing: border-box;">

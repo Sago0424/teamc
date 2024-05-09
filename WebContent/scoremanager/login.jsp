@@ -18,7 +18,7 @@
             }
 </script>
 		<body>
-			<div class="row border mx-3 mb-3 py-2 align-items-center rounded"
+			<div class="row border mx-3 mb-3  align-items-center rounded"
 				id="fillter">
 				<h2 class="h2 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4"
 					style="text-align: center;">ログイン</h2>
@@ -36,14 +36,14 @@
 						<div>
 							<input type="text" id="id" name="id" placeholder="ID"
 								maxlength="20" required
-								style="width: 80%; max-width: 600px; height: 50px; margin-bottom: 10px; box-sizing: border-box;"
+								style="width: 80%; max-width: 600px; height: 50px; margin-bottom: 10px; border-radius: 5px; border: 2px solid silver; box-sizing: border-box;"
 								value="${not empty errors ? param.id : '' }">
 						</div>
 						<div>
 							<input type="password" id="password" name="password"
 								placeholder="パスワード" maxlength="20" required maxlength="20"
 								required
-								style="width: 80%; max-width: 600px; height: 50px; margin-bottom: 10px; box-sizing: border-box;">
+								style="width: 80%; max-width: 600px; height: 50px; margin-bottom: 10px; border-radius: 5px; border: 2px solid silver; box-sizing: border-box;">
 						</div>
 						<div>
 							<input type="checkbox" id="chk_d_ps" onclick="togglePassword()">
@@ -51,7 +51,7 @@
 						</div>
 						<div>
 							<input type="submit" name="login" value="ログイン"
-								style="max-width: 130px; width: 100%; background-color: #5577ff; color: white; text-align: center;">
+								style="margin-top: 10px; margin-bottom: 10px; max-width: 130px; height: 40px; width: 100%; background-color: #5577ff; color: white; text-align: center; border-radius: 5px; border: none;">
 						</div>
 					</form>
 				</div>

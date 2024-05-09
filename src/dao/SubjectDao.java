@@ -9,7 +9,6 @@ import java.util.List;
 
 import bean.School;
 import bean.Subject;
-import bean.Test;
 
 public class SubjectDao extends Dao {
 
@@ -40,32 +39,32 @@ public class SubjectDao extends Dao {
 	    return subjects;
 	}
 
-	public Subject get(String subjectCd) throws Exception {
-	    Subject subject = null;
-	    Connection connection = null;
-	    PreparedStatement statement = null;
-	    ResultSet resultSet = null;
+    public Subject get(String subjectCd) throws Exception {
+        Subject subject = null;
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
 
-	    try {
-	        connection = getConnection();
-	        statement = connection.prepareStatement("SELECT * FROM SUBJECT WHERE CD = ? AND deleted = false");
-	        statement.setString(1, subjectCd);
-	        resultSet = statement.executeQuery();
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement("SELECT * FROM SUBJECT WHERE CD = ?");
+            statement.setString(1, subjectCd);
+            resultSet = statement.executeQuery();
 
-	        if (resultSet.next()) {
-	            subject = new Subject();
-	            subject.setCd(resultSet.getString("CD"));
-	            subject.setName(resultSet.getString("NAME"));
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        throw e;
-	    } finally {
-	        close(resultSet, statement, connection);
-	    }
+            if (resultSet.next()) {
+                subject = new Subject();
+                subject.setCd(resultSet.getString("CD"));
+                subject.setName(resultSet.getString("NAME"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            close(resultSet, statement, connection);
+        }
 
-	    return subject;
-	}
+        return subject;
+    }
 
     public List<Subject> filter(School school) throws Exception {
         List<Subject> sublist = new ArrayList<>();
@@ -199,21 +198,23 @@ public class SubjectDao extends Dao {
             e.printStackTrace();
         }
     }
-    public List<Test> getAllRounds() throws Exception {
-        List<Test> rounds = new ArrayList<>();
+    public Subject get(String subjectCd, School school) throws Exception {
+        Subject subject = null;
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
         try {
             connection = getConnection();
-            statement = connection.prepareStatement("SELECT * FROM TEST");
+            statement = connection.prepareStatement("SELECT * FROM SUBJECT WHERE CD = ? AND SCHOOL_CD = ?");
+            statement.setString(1, subjectCd);
+            statement.setString(2, school.getCd());
             resultSet = statement.executeQuery();
 
-            while (resultSet.next()) {
-                Test test = new Test();
-                test.setNo(resultSet.getInt("NO"));
-                rounds.add(test);
+            if (resultSet.next()) {
+                subject = new Subject();
+                subject.setCd(resultSet.getString("CD"));
+                subject.setName(resultSet.getString("NAME"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -222,8 +223,10 @@ public class SubjectDao extends Dao {
             close(resultSet, statement, connection);
         }
 
-        return rounds;
-    }
+        return subject;
+
+
+}
 
 
 }

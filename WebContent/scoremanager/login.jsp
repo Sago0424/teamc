@@ -3,22 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/common/base.jsp">
 	<c:param name="title">得点管理システム</c:param>
-	<c:param name="scripts">
-	</c:param>
+	<c:param name="scripts"></c:param>
 	<c:param name="content">
-
 		<script>
-			// パスワードの表示/非表示を切り替える関数
-			function togglePassword() {
-				var passwordInput = document.getElementById('password');
-				var passwordCheckbox = document.getElementById('chk_d_ps');
-				if (passwordCheckbox.checked) {
-					passwordInput.type = 'text';
-				} else {
-					passwordInput.type = 'password';
-				}
-			}
-		</script>
+            // パスワードの表示/非表示を切り替える関数
+            function togglePassword() {
+                var passwordInput = document.getElementById('password');
+                var passwordCheckbox = document.getElementById('chk_d_ps');
+                if (passwordCheckbox.checked) {
+                    passwordInput.type = 'text';
+                } else {
+                    passwordInput.type = 'password';
+                }
+            }
+</script>
 		<body>
 			<div class="row border mx-3 mb-3 py-2 align-items-center rounded"
 				id="fillter">
@@ -38,7 +36,8 @@
 						<div>
 							<input type="text" id="id" name="id" placeholder="ID"
 								maxlength="20" required
-								style="width: 80%; max-width: 600px; height: 50px; margin-bottom: 10px; box-sizing: border-box;">
+								style="width: 80%; max-width: 600px; height: 50px; margin-bottom: 10px; box-sizing: border-box;"
+								value="${not empty errors ? param.id : '' }">
 						</div>
 						<div>
 							<input type="password" id="password" name="password"

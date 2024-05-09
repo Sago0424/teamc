@@ -13,9 +13,9 @@
 			<br>
 			<br>
 
-		<a href="SubjectCreate.action" class="nav-item"
+		<a href="TestRegist.action" class="nav-item"
 			style="margin-right: 60px;">戻る</a>
-		<a href="TestRegist.action" class="nav-item">成績参照</a>
+		<a href="TestList.action" class="nav-item">成績参照</a>
 
 
 	</c:param>

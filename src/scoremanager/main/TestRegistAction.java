@@ -54,8 +54,6 @@ public class TestRegistAction extends Action{
 		Subject subuject = subDao.get(subject, teacher.getSchool());
 		// DBからデータ取得
 
-		List<String> cNumList = cNumDao.filter(teacher.getSchool());
-		List<Subject> SubList = subDao.filter(teacher.getSchool());
 		if (entYearStr != null) {
 			// 数値に変換
 			entyear = Integer.parseInt(entYearStr);
@@ -118,7 +116,5 @@ public class TestRegistAction extends Action{
 		// すべての科目を取得してセット
 		request.setAttribute("number_set", testDao.setAllno());
 		request.getRequestDispatcher("test_regist.jsp").forward(request, response);
-	}
-	private void SetRequestData(HttpServletRequest request, HttpServletResponse response){
 	}
 }

@@ -3,12 +3,25 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/common/base.jsp">
 	<c:param name="title">得点管理システム</c:param>
-	<c:param name="scripts"></c:param>
+	<c:param name="scripts">
+		<script>
+			function validateForm() {
+				var selectedYear = document.getElementById("student-f1-select").value;
+				if (selectedYear === "0") {
+					document.getElementById("error-message").style.display = "block";
+					return false;
+				} else {
+					document.getElementById("error-message").style.display = "none";
+					return true;
+				}
+			}
+		</script>
+	</c:param>
 	<c:param name="content">
 		<div style="background-color:; margin: -20px; padding: 20px;">
-			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">学生情報登録</h2>
+			<h2 style="text-align:; color: #4a4a4a;">学生情報登録</h2>
 			<form action="StudentCreateExecute.action" method="post"
-				style="max-width: 600px;">
+				style="max-width: 600px;" onsubmit="return validateForm();">
 				<div style="margin-bottom: 20px;">
 					<label for="student-f1-select"
 						style="display: block; margin-bottom: 5px;">入学年度</label> <select
@@ -20,6 +33,9 @@
 						</c:forEach>
 					</select>
 				</div>
+				<!-- エラーメッセージの追加 -->
+				<div id="error-message"
+					style="display: none; color: red; margin-bottom: 10px;">入学年度を選択してください。</div>
 				<div style="margin-bottom: 20px;">
 					<label for="no" style="display: block; margin-bottom: 5px;">学生番号</label>
 					<input type="text" id="no" name="no" placeholder="学生番号を入力してください"

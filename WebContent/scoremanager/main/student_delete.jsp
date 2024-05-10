@@ -6,7 +6,7 @@
 	<c:param name="title" value="得点管理システム" />
 	<c:param name="scripts"></c:param>
 	<c:param name="content">
-		<h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">学生情報削除</h2>
+		<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">学生情報削除</h2>
 		<form action="StudentDeleteExecute.action" method="post"
 			onsubmit="return confirm('この学生を削除しますか？');">
 			<p>学生番号: ${student.getNo()}</p>

@@ -39,7 +39,7 @@
                 color: #666;
             }
         </style>
-        <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">学生情報変更</h2>
+        <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">学生情報変更</h2>
         <form action="StudentUpdateExecute.action" method="post">
             <label for="entYear">入学年度<br>　${student.getEntYear()}</label>
             <input type="hidden" name="entYear" value="${student.getEntYear()}" />

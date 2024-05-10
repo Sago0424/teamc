@@ -19,7 +19,7 @@
 	</c:param>
 	<c:param name="content">
 		<div style="background-color:; margin: -20px; padding: 20px;">
-			<h2 style="text-align:; color: #4a4a4a;">学生情報登録</h2>
+			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">学生情報登録</h2>
 			<form action="StudentCreateExecute.action" method="post"
 				style="max-width: 600px;" onsubmit="return validateForm();">
 				<div style="margin-bottom: 20px;">

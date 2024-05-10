@@ -20,7 +20,7 @@ public class SubjectDao extends Dao {
 
 		try {
 			connection = getConnection();
-			statement = connection.prepareStatement("SELECT * FROM SUBJECT WHERE deleted = false");
+			statement = connection.prepareStatement("SELECT * FROM SUBJECT");
 			resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {

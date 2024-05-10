@@ -1,5 +1,3 @@
-// StudentCreateExecuteAction.java
-
 package scoremanager.main;
 
 import java.io.IOException;
@@ -54,8 +52,11 @@ public class StudentCreateExecuteAction extends Action {
         }
 
         if (exists) {
-            // 学生番号が既に存在する場合はエラーメッセージを返す
-            response.sendRedirect("student_create.jsp?error=exists");
+            // 学生番号が既に存在する場合はエラーメッセージをセットして元のページに戻る
+            request.setAttribute("errorMessage", "学生番号が重複しています。");
+            request.setAttribute("no", no); // 学生番号を再度入力させるためにパラメータを設定
+            request.setAttribute("name", name); // 氏名を再度入力させるためにパラメータを設定
+            request.getRequestDispatcher("StudentCreate.action").forward(request, response);
             return;
         }
 
@@ -65,7 +66,10 @@ public class StudentCreateExecuteAction extends Action {
             if (entYear != 0) {
                 success = studentDao.save(student);
             } else {
-                request.getRequestDispatcher("student_create.action").forward(request, response);
+                // 学生番号が存在しない場合でも、入力した情報を再度入力させるためにパラメータを設定
+                request.setAttribute("no", no);
+                request.setAttribute("name", name);
+                request.getRequestDispatcher("student_create.jsp").forward(request, response);
                 return;
             }
         } catch (Exception e) {

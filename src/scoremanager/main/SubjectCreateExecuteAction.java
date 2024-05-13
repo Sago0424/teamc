@@ -20,16 +20,9 @@ public class SubjectCreateExecuteAction extends Action {
         String cd = request.getParameter("cd");
         String name = request.getParameter("name");
 
-
         // セッションからログインユーザー（教員）を取得
         HttpSession session = request.getSession();
         Teacher teacher = (Teacher) session.getAttribute("user"); // キャストを追加
-
-        // 科目コードが3文字でない場合、エラーメッセージを表示して元のページに戻す
-        //if (cd.length() != 3) {
-          //  response.sendRedirect("subject_create.jsp?error=invalid_cd");
-            //return;
-        //}
 
         // Subjectオブジェクトを作成
         Subject subject = new Subject();
@@ -37,10 +30,25 @@ public class SubjectCreateExecuteAction extends Action {
         subject.setName(name);
         subject.setSchool(teacher.getSchool());
 
-
-
-        // SubjectDaoを使用して新しい科目をデータベースに登録
+        // 科目コードが既に存在するかチェック
         SubjectDao subjectDao = new SubjectDao();
+        boolean exists = false;
+        try {
+            exists = subjectDao.exists(cd);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (exists) {
+            // 科目コードが既に存在する場合はエラーメッセージをセットして元のページに戻る
+            request.setAttribute("errorMessage", "科目コードが重複しています。");
+            request.setAttribute("cd", cd); // 科目コードを再度入力させるためにパラメータを設定
+            request.setAttribute("name", name); // 科目名を再度入力させるためにパラメータを設定
+            request.getRequestDispatcher("SubjectCreate.action").forward(request, response);
+            return;
+        }
+
+        // 科目コードが存在しない場合は登録を試みる
         boolean success = false;
         try {
             success = subjectDao.save(subject);

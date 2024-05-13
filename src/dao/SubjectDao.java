@@ -227,4 +227,44 @@ public class SubjectDao extends Dao {
 
 
 	}
+	public boolean exists(String Cd) throws Exception {
+	    // コネクションを確立
+	    Connection connection = getConnection();
+	    // プリペアードステートメント
+	    PreparedStatement statement = null;
+	    // リザルトセット
+	    ResultSet resultSet = null;
+
+	    try {
+	        // プリペアードステートメントにSQL文をセット
+	        statement = connection.prepareStatement("SELECT COUNT(*) FROM subject WHERE cd = ?");
+	        // プリペアードステートメントに学生番号をバインド
+	        statement.setString(1, Cd);
+	        // SQL文を実行し、リザルトセットを取得
+	        resultSet = statement.executeQuery();
+
+	        // 結果が存在し、かつ1件以上の場合は学生番号が既に存在する
+	        if (resultSet.next() && resultSet.getInt(1) > 0) {
+	            return true;
+	        }
+	    } catch (SQLException e) {
+	        throw e;
+	    } finally {
+	        // リソースを解放
+	        if (resultSet != null) {
+	            resultSet.close();
+	        }
+	        if (statement != null) {
+	            statement.close();
+	        }
+	        if (connection != null) {
+	            connection.close();
+	        }
+	    }
+
+	    // 学生番号が存在しない場合
+	    return false;
+	}
+
+
 }

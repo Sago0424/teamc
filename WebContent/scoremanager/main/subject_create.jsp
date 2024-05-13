@@ -15,6 +15,9 @@
 						type="text" id="subject-f1-select" name="cd"
 						placeholder="科目コードを入力してください" required
 						style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+					<c:if test="${not empty errorMessage}">
+						<div style="color: orange; margin-top: 5px;">${errorMessage}</div>
+					</c:if>
 				</div>
 				<div style="margin-bottom: 20px;">
 					<label for="name" style="display: block; margin-bottom: 5px;">科目名</label>
